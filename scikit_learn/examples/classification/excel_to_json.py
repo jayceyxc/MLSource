@@ -62,5 +62,5 @@ class ExcelAdaptor(object):
 if __name__ == '__main__':
     adaptor = ExcelAdaptor()
     ss = json.dumps(adaptor.excel_to_json(sys.argv[1]), ensure_ascii=False, indent=2)
-    print ss
+    print(ss)
     # adaptor.json_to_excel(excel_file_name='test.xls', json_obj=json.loads(ss, encoding='utf-8'))

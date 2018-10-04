@@ -15,28 +15,54 @@ import tensorflow as tf
 
 
 def weight_variable(shape):
+    """
+    使用截断的正态分布噪声，标准差设为0.1
+    :param shape:
+    :return:
+    """
     initial = tf.truncated_normal(shape=shape, stddev=0.1)
     return tf.Variable(initial_value=initial)
 
 
 def bias_variable(shape):
+    """
+    给偏置增加一些小的正值（0.1）用来避免死亡节点（dead neurons）。
+    :param shape:
+    :return:
+    """
     initial = tf.constant(0.1, shape=shape)
     return tf.Variable(initial_value=initial)
 
 
 def conv2d(x, W):
+    """
+    tf.nn.conv2d是TensorFlow中的2维卷积函数，strides代表卷积模板移动的步长，都是1代表会不遗漏的划过图片的每一个点。padding代表
+    边界的处理方式，这里的SAME代表个边界加上padding让卷积的输出和输入保持同样的尺寸
+    :param x: 输入
+    :param W: 卷积的参数，比如[5,5,1,32]:前面两个数字代表卷积核的尺寸；第三个数字
+              代表有多少个channel。因为我们只有灰度单色，所以是1，如果是彩色的RGB图片，这里应该是3。最后一个数字代表卷积核的数量，
+              也就是这个卷积层会提取多少类的特征。
+    :return:
+    """
     return tf.nn.conv2d(input=x, filter=W, strides=[1, 1, 1, 1], padding='SAME')
 
 
 def max_pool_2x2(x):
+    """
+    最大池化函数，使用2*2的最大池化，即将一个2*2的像素块将为1*1的像素。最大池化会保留原始像素块中灰度值最高的那一个像素，即
+    保留最显著的特征。因为希望整体上缩小图片尺寸，因此池化层的strides也设为横竖两个方向以2位步长。
+    :param x:
+    :return:
+    """
     return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
 
 if __name__ == '__main__':
-    mnist = input_data.read_data_sets(train_dir='/Users/yuxuecheng/MLData/MNIST_data', one_hot=True)
+    mnist = input_data.read_data_sets(train_dir='/Users/yuxuecheng/Learn/MLData/MNIST_data', one_hot=True)
     x = tf.placeholder(tf.float32, [None, 784])
     y_ = tf.placeholder(tf.float32, [None, 10])
     x_image = tf.reshape(x, [-1, 28, 28, 1])
+
     W_conv1 = weight_variable([5, 5, 1, 32])
     b_conv1 = bias_variable([32])
     h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)

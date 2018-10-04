@@ -136,15 +136,15 @@ def iris_predict():
 
     test_x = iris.data[60:]
     test_y = iris.target[60:]
-    print test_y
+    print(test_y)
     svc_predict_y = svc.predict(test_x)
-    print "svc: ", svc_predict_y
+    print("svc: ", svc_predict_y)
     rbf_svc_predict_y = rbf_svc.predict(test_x)
-    print "rbf_svc: ", rbf_svc_predict_y
+    print("rbf_svc: ", rbf_svc_predict_y)
     poly_svc_predict_y = poly_svc.predict(test_x)
-    print "poly_svc: ", poly_svc_predict_y
+    print("poly_svc: ", poly_svc_predict_y)
     lin_predict_y = lin_svc.predict(test_x)
-    print "lin_svc: ", lin_predict_y
+    print("lin_svc: ", lin_predict_y)
 
 
 
