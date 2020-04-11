@@ -1,4 +1,0 @@
-hello welcome
-test world
-word work
-data center

@@ -1,7 +1,0 @@
-Enabled,Network Type,Label,Rule Type,URL Pattern
-1,all,Games,domain,17173.com
-1,all,Games,host,games.sina.com.cn
-1,fix,Games,url,dnf.17173.com/baike/qigongshi.shtml
-1,all,Video,domain,youku.com
-1,all,Video,host,video.sina.com.cn
-1,all,Hao315,domain,hao315.cn
